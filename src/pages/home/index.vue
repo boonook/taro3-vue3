@@ -1,35 +1,8 @@
 <template>
   <view class="index">
-    <View>
-      <Image
-        style='width: 300px;height: 100px;background: #fff;'
-        src='https://camo.githubusercontent.com/3e1b76e514b895760055987f164ce6c95935a3aa/687474703a2f2f73746f726167652e333630627579696d672e636f6d2f6d74642f686f6d652f6c6f676f2d3278313531333833373932363730372e706e67'
-      />
-    </View>
-    <!-- <text>{{ msg }}</text> -->
-    <icon size="60" type="success" />
-    <icon size="60" type="info" />
-    <icon size="60" type="warn" color="#ccc" />
-    <icon size="60" type="warn" />
-    <icon size="60" type="waiting" />
-    <icon size="20" type="success_no_circle" />
-    <icon size="20" type="warn" />
-    <icon size="20" type="success" />
-    <icon size="20" type="download" />
-    <icon size="20" type="clear" color="red" />
-    <icon size="20" type="search" />
-
-    <button class="btn-max-w" plain type="primary" @tap="toTaroUI()">
-      按钮
-    </button>
-
-    <button class="btn-max-w" plain type="primary" @tap="toTaroStore()">
-      操作store
-    </button>
-
-    <button class="btn-max-w" plain type="primary" @tap="getData()">
-      网络请求
-    </button>
+    <view>
+      <text>辣图</text>
+    </view>
   </view>
 </template>
 
@@ -42,47 +15,6 @@ export default {
   data() {
     return {
       msg: "Hello world!",
-      btn: [
-        {
-          text: "页面主操作 Normal",
-          size: "default",
-          type: "primary"
-        },
-        {
-          text: "页面主操作 Loading",
-          size: "default",
-          type: "primary",
-          loading: true
-        },
-        {
-          text: "页面主操作 Disabled",
-          size: "default",
-          type: "primary",
-          disabled: true
-        },
-        {
-          text: "页面次要操作 Normal",
-          size: "default",
-          type: "default"
-        },
-        {
-          text: "页面次要操作 Disabled",
-          size: "default",
-          type: "default",
-          disabled: true
-        },
-        {
-          text: "警告类操作 Normal",
-          size: "default",
-          type: "warn"
-        },
-        {
-          text: "警告类操作 Disabled",
-          size: "default",
-          type: "warn",
-          disabled: true
-        }
-      ]
     };
   },
 
@@ -151,44 +83,6 @@ export default {
     ...mapActions([
       'handle',
     ]),
-    getData() {
-      let that = this;
-      getWxarticleChaptersJson({keyword:'123'}).then(res => {
-          that.msg = res;
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    },
-
-    toTaroStore(){
-      this.handle(true).then(res=>{
-        debugger
-      })
-    },
-
-    toTaroUI() {
-      Taro.navigateTo({
-        url: "/pages/taroui/taroui?id=1",
-        events: {
-          // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
-          acceptDataFromOpenedPage: function(data) {
-            console.log(data);
-          },
-          someEvent: function(data) {
-            console.log(data);
-          }
-        }
-        // success: function(res) {
-        //   // 通过eventChannel向被打开页面传送数据
-        //   res.eventChannel.emit("acceptDataFromOpenerPage", { data: "test" });
-        // }
-      }).then(res => {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit("acceptDataFromOpenerPage", { data: "test" });
-      });
-    }
   }
 };
 </script>
